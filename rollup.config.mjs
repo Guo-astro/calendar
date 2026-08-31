@@ -24,11 +24,11 @@ const banner = `/*!
 const commonPlugins = [
     resolve(),
     importAssertionsPlugin(),
-    terser(),
     babel({
         babelHelpers: 'runtime',
         exclude:'node_modules/**'
-    })
+    }),
+    terser()
 ];
 
  export default [{
@@ -53,7 +53,11 @@ const commonPlugins = [
         file: './dist/widget-calendar.min.js',
         format: 'umd',
         banner
-    }],
+    },{
+        file: './dist/widget-calendar.min.mjs',
+        format: 'es',
+        banner
+     }],
     plugins: commonPlugins,
     watch: {
         exclude: 'node_modules/**'

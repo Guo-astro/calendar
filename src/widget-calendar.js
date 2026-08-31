@@ -40,7 +40,12 @@ class WidgetCalendar extends HTMLElement {
     attributeChangedCallback(name, oldValue, newValue){
         if(name=='date'&&oldValue!=newValue){
             this.formatDate(newValue);
-        }
+        }else if(name=='mode'&&oldValue!=newValue){
+            const $module = this.shadowRoot.querySelector('.mod-calendar');
+            if($module){
+                $module.className = 'mod-calendar mode-'+this.mode;
+            }
+         }
     }
     connectedCallback () {
         let _ = this;
@@ -229,7 +234,7 @@ class WidgetCalendar extends HTMLElement {
             _.currentMonthData.push(obj);
         }
         // 是否增加一行
-        if(_.currentMonthData.length<=35){
+        if(_.currentMonthData.length<42){
             let lastDay = _.currentMonthData[_.currentMonthData.length-1];
             for(let i=1;_.currentMonthData.length<42;i++){
                 let obj = calendar.getDateBySolar(lastDay['sYear'],lastDay['sMonth'],lastDay['sDay']+i);

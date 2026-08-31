@@ -18,7 +18,7 @@
         },
         "./widget-calendar": {
             "default": "./dist/widget-calendar.min.js",
-            "import": "./dist/widget-calendar.min.js"
+            "import": "./dist/widget-calendar.min.mjs"
         }
     },
     "repository": {

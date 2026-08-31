@@ -21,8 +21,11 @@ function getGanZhiByIndex(gzIndex){
 // 获取干支年: 1984年为甲子年
 export function getGanZhiYear(sYear, sMonth, sDay){
     let timestamp = getTimestampBySolar(sYear, sMonth, sDay);
-    let { lYear } = getLunarByTimestamp(timestamp);
-    let gzIndex = lYear - 1984;
+    let lunar = getLunarByTimestamp(timestamp);
+    if(!lunar){
+        return '';
+    }
+    let gzIndex = lunar.lYear - 1984;
     return getGanZhiByIndex(gzIndex);
 }
 

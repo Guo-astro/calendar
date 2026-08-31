@@ -79,7 +79,7 @@ export function getTimestampByLunar(lYear,lMonth,lDay,isLeap){
         return null;
     }
     let data = parseInt(monthData[lYear - minYear],32);
-    let days = (isLeap?data&1<<16:1<<(17-lMonth))?30:29;
+    let days = (isLeap?data&1<<16:(data&1<<(16-lMonth)))?30:29;
     if(lDay>days){
         return null;
     }
@@ -113,6 +113,10 @@ export function getLunarByTimestamp(timestamp){
             break;
         }
         count+= days;
+    }
+    // 超出农历有效范围
+    if(lYear>maxYear){
+        return null;
     }
     let data = parseInt(monthData[lYear - minYear],32);
     let leapMonth = getLeapMonth(lYear);

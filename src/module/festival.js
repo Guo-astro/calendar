@@ -102,7 +102,7 @@ export const sFestival2 = {
         'found':'1998-03'
     }],
     '03-05':[{
-        'name':'雷锋纪念日',
+        'name':'学习雷锋纪念日',
         'found':'1963-03-05'
     }],
     '03-09':[{
@@ -584,18 +584,20 @@ export function getTermFestivalsBySolar(sYear,sMonth,sDay){
     })();
     // 数九
     (function(){
-        let last_termDate = getTermDate(sYear-1);
-        let last_dongzhi_time = new Date(sYear-1,11,last_termDate[23]).getTime();
-        let dongzhi_time = new Date(sYear,11,termDate[23]).getTime();
         let count = 0;
-        for(let time = last_dongzhi_time;time<=last_dongzhi_time+8*9*dayTime;time+=9*dayTime){
-            let solar = getSolarByTimestamp(time);
-            if(solar['sYear']==sYear&&solar['sMonth']==sMonth&&solar['sDay']==sDay){
-                festivals.push(shujiu[count]);
+        let last_termDate = getTermDate(sYear-1);
+        if(last_termDate){
+            let last_dongzhi_time = new Date(sYear-1,11,last_termDate[23]).getTime();
+            for(let time = last_dongzhi_time;time<=last_dongzhi_time+8*9*dayTime;time+=9*dayTime){
+                let solar = getSolarByTimestamp(time);
+                if(solar['sYear']==sYear&&solar['sMonth']==sMonth&&solar['sDay']==sDay){
+                    festivals.push(shujiu[count]);
+                }
+                count++;
             }
-            count++;
         }
         count = 0;
+        let dongzhi_time = new Date(sYear,11,termDate[23]).getTime();
         for(let time = dongzhi_time;time<=dongzhi_time+8*9*dayTime;time+=9*dayTime){
             let solar = getSolarByTimestamp(time);
             if(solar['sYear']==sYear&&solar['sMonth']==sMonth&&solar['sDay']==sDay){
